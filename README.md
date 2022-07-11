@@ -13,4 +13,4 @@ git config --global user.username [YOUR GITHUB USERNAME]
 git config --global user.email [YOUR GITHUB LINKED EMAIL]
 
 ```
-- clone the project with ssh : git clone git@github.com:Zacaria/quantum-bb84.git
+- clone the project with ssh : `git clone git@github.com:Zacaria/quantum-bb84.git`
