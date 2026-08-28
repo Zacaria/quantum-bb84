@@ -31,6 +31,17 @@ python -m pip install -r requirements.txt
 jupyter notebook quantumbb84tp.ipynb
 ```
 
+On Apple Silicon, the legacy `tweedledum` wheel may contain Intel-only native
+code. Build that dependency first, then install the requirements:
+
+```bash
+python -m pip install pip==21.3.1 setuptools==63.1.0 wheel==0.37.1
+python -m pip install scikit-build==0.15.0 'cmake<4' ninja
+python -m pip install --no-build-isolation \
+  'git+https://github.com/boschmitt/tweedledum.git@v1.1.1'
+python -m pip install -r requirements.txt
+```
+
 `utils.py` and `otpUtils.py` must remain beside the notebook. Both files were
 recovered from the original local project rather than reverse-engineered from
 the notebook output.
