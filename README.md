@@ -5,11 +5,24 @@ qubits, optionally simulates an eavesdropper, and demonstrates one-time-pad
 message encryption.
 
 **[Read the rendered notebook](https://zacaria.github.io/quantum-bb84/)** ·
+[Run the live demo](https://mybinder.org/v2/gh/Zacaria/quantum-bb84/master?urlpath=tree/demo.ipynb) ·
 [Download the notebook](quantumbb84tp.ipynb) ·
 [Archived Jovian page](https://jovian.com/zacaria/quantumbb84tp)
 
 The rendered page keeps the outputs and circuit diagrams preserved by Jovian,
 so it can be read without installing the historical Qiskit environment.
+
+## Run live
+
+[![Launch the live demo on Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Zacaria/quantum-bb84/master?urlpath=tree/demo.ipynb)
+
+Binder opens `demo.ipynb` in a temporary Jupyter environment. Change the
+values in **Demo controls**, then choose **Kernel → Restart & Run All**.
+
+- `EVE_RATE = 0` demonstrates successful key exchange and decryption.
+- `EVE_RATE = 100` deterministically demonstrates Eve being detected.
+- Keep the short defaults for a quick presentation; enabling the full hash
+  increases the simulated message and therefore the run time.
 
 ## Features
 
@@ -22,24 +35,19 @@ so it can be read without installing the historical Qiskit environment.
 
 ## Run locally
 
-The notebook was written for Python 3.9 and Qiskit 0.37 in July 2022.
+The local launcher recreates the historical Python 3.9/Qiskit 0.37 environment
+and handles the legacy Apple Silicon dependency workaround automatically.
 
 ```bash
-python3.9 -m venv .venv
-source .venv/bin/activate
-python -m pip install -r requirements.txt
-jupyter notebook quantumbb84tp.ipynb
+just start
 ```
 
-On Apple Silicon, the legacy `tweedledum` wheel may contain Intel-only native
-code. Build that dependency first, then install the requirements:
+The first run requires [`uv`](https://docs.astral.sh/uv/) and may take a few
+minutes. Later runs reuse `.venv` and open `demo.ipynb` directly in Brave on
+macOS when Brave is installed.
 
 ```bash
-python -m pip install pip==21.3.1 setuptools==63.1.0 wheel==0.37.1
-python -m pip install scikit-build==0.15.0 'cmake<4' ninja
-python -m pip install --no-build-isolation \
-  'git+https://github.com/boschmitt/tweedledum.git@v1.1.1'
-python -m pip install -r requirements.txt
+brew install just uv
 ```
 
 `utils.py` and `otpUtils.py` must remain beside the notebook. Both files were
